@@ -1,8 +1,15 @@
 # 🦙Llama2 Tokenizer for JavaScript
 
-Llama2 Tokenizer is a TypeScript library for tokenizing and encoding text using the Llama2 vocabulary. It is designed to be simple, efficient, and flexible for natural language processing tasks.
+Llama2 Tokenizer is a TypeScript library for tokenizing and encoding text using the Llama2 vocabulary.
+
+Suitable for browser and nodejs environment.
 
 # Features
+
+- fast
+- support llama2
+- typescript
+- 95% test coverage
 
 ## support models
 - llama2
@@ -11,31 +18,6 @@ Llama2 Tokenizer is a TypeScript library for tokenizing and encoding text using 
 
 # Why llama2 ?
 llama2's vocab is different from llama1, so a new tokenizer needs to be defined to adapt to llama2's vocab
-
-# Benchmark
-We conducted a benchmark test to measure the performance of the Llama2 Tokenizer in tokenizing a given text for a specified number of iterations. The results for 1000 iterations are as follows:
-
-Input Text:
-<details>
-<summary>Click to expand</summary>
-<pre>
-
-🌸🍻🍅🍓🍒🏁🚩🎌🏴🏳️🏳️‍🌈
-
-Lorem ipsum dolor sit amet, duo te voluptua detraxit liberavisse, vim ad vidisse gubergren consequuntur, duo noster labitur ei. Eum minim postulant ad, timeam docendi te per, quem putent persius pri ei. Te pro quodsi argumentum. Sea ne detracto recusabo, ius error doming honestatis ut, no saepe indoctum cum.
-
-Ex natum singulis necessitatibus usu. Id vix brute docendi imperdiet, te libris corrumpit gubergren sea. Libris deleniti placerat an qui, velit atomorum constituto te sit, est viris iriure convenire ad. Feugait periculis at mel, libris dissentias liberavisse pri et. Quo mutat iudico audiam id.
-</pre>
-</details>
-
-Results:
-```bash
-Benchmark Results (1000 iterations):
-Total Time: 0.88822 seconds
-Average Time per Iteration: 0.00089 seconds
-```
-
-This benchmark demonstrates the tokenizer's efficiency in processing text, making it a reliable choice for various natural language processing applications.
 
 ## Installation
 
@@ -122,6 +104,29 @@ const main = async () => {
 };
 
 main();
+```
+
+# Benchmark
+We conducted a benchmark test to measure the performance of the Llama2 Tokenizer in tokenizing a given text for a specified number of iterations. The results for 1000 iterations are as follows:
+
+Input Text:
+<details>
+<summary>Click to expand</summary>
+<pre>
+
+🌸🍻🍅🍓🍒🏁🚩🎌🏴🏳️🏳️‍🌈
+
+Lorem ipsum dolor sit amet, duo te voluptua detraxit liberavisse, vim ad vidisse gubergren consequuntur, duo noster labitur ei. Eum minim postulant ad, timeam docendi te per, quem putent persius pri ei. Te pro quodsi argumentum. Sea ne detracto recusabo, ius error doming honestatis ut, no saepe indoctum cum.
+
+Ex natum singulis necessitatibus usu. Id vix brute docendi imperdiet, te libris corrumpit gubergren sea. Libris deleniti placerat an qui, velit atomorum constituto te sit, est viris iriure convenire ad. Feugait periculis at mel, libris dissentias liberavisse pri et. Quo mutat iudico audiam id.
+</pre>
+</details>
+
+Results:
+```bash
+Benchmark Results (1000 iterations):
+Total Time: 0.88822 seconds
+Average Time per Iteration: 0.00089 seconds
 ```
 
 ## License

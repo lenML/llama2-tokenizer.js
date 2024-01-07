@@ -1,6 +1,6 @@
 {
   "name": "@lenml/llama2-tokenizer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "source": "src/main.ts",
   "main": "dist/main.js",
