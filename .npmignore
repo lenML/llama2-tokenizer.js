@@ -1,0 +1,6 @@
+data/
+_temp/
+tests/
+coverage/
+_*.ts
+_*.js
