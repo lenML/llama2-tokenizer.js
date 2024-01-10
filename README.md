@@ -4,6 +4,8 @@ Llama2 Tokenizer is a TypeScript library for tokenizing and encoding text using 
 
 Suitable for browser and nodejs environment.
 
+> online playground: https://lenml.github.io/llama-tokenizer-playground/
+
 # Features
 
 - fast
