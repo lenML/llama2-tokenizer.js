@@ -131,6 +131,12 @@ Total Time: 0.88822 seconds
 Average Time per Iteration: 0.00089 seconds
 ```
 
+# TODOs
+- [x] support llama2 vocab
+- [ ] support chatglm vocab
+- [ ] support baichuan vocab
+- [ ] Chat Template
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
