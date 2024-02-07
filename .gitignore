@@ -131,3 +131,8 @@ dist
 
 _temp/
 _test.ts
+
+**/src/vocab.ts
+
+**/*_models/*.model
+**/*_models/*.json

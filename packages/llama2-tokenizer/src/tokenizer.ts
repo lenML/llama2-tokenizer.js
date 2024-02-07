@@ -1,5 +1,4 @@
 import { Trie } from "./Trie";
-import { load_llama2_vocab } from "./vocab";
 
 const utf8Encoder = new TextEncoder();
 const utf8Decoder = new TextDecoder("utf-8");
@@ -16,6 +15,11 @@ export class Llama2Tokenizer {
 
   constructor() {}
 
+  /**
+   * Install the provided vocabulary into the class instance.
+   *
+   * @param {Record<string, number>} vocab - The vocabulary to be installed
+   */
   install_vocab(vocab: Record<string, number>) {
     this.vocab = vocab;
     this.vocab_ids = Object.fromEntries(
@@ -27,24 +31,41 @@ export class Llama2Tokenizer {
     }
   }
 
-  load_llama2_vocab() {
-    const vocab = load_llama2_vocab();
-    this.install_vocab(vocab);
-  }
-
+  /**
+   * Get the size of the vocabulary, including special tokens.
+   *
+   * @return {number} the size of the vocabulary
+   */
   get vocab_size(): number {
     return (
       Object.keys(this.vocab).length + Object.keys(this.special_tokens).length
     );
   }
 
+  /**
+   * Get the maximum id from the vocab_ids and special_tokens.
+   *
+   * @return {number} the maximum id
+   */
   get max_id(): number {
-    return Math.max(
-      ...Object.keys(this.vocab_ids).map((id) => parseInt(id)),
-      ...Object.values(this.special_tokens)
-    );
+    // NOTE: vocab 最大可能超过 js 函数参数个数最大范围，所以不能 `Math.max(...Object.keys(this.vocab_ids))`
+    let max_id = 0;
+    for (const id of Object.keys(this.vocab_ids)) {
+      max_id = Math.max(max_id, parseInt(id));
+    }
+    for (const id of Object.values(this.special_tokens)) {
+      max_id = Math.max(max_id, id);
+    }
+    return max_id;
   }
 
+  /**
+   * Adds a special token with an optional token ID.
+   *
+   * @param {string} token - the special token to be added
+   * @param {number} [token_id] - the optional token ID
+   * @return {void}
+   */
   add_special_token(token: string, token_id?: number) {
     if (token_id === undefined) {
       token_id = this.max_id + 1;
@@ -53,12 +74,35 @@ export class Llama2Tokenizer {
     this.tokens_trie.add(token);
   }
 
-  add_special_tokens(tokens: string[]) {
+  /**
+   * Adds special tokens to the list of tokens.
+   *
+   * @param {Array} tokens - An array of tokens to add. Each token can be a string or an object with `token` and `token_id` properties.
+   */
+  add_special_tokens(
+    tokens: (
+      | string
+      | {
+          token: string;
+          token_id: number;
+        }
+    )[]
+  ) {
     for (const token of tokens) {
-      this.add_special_token(token);
+      if (typeof token === "string") {
+        this.add_special_token(token);
+      } else {
+        this.add_special_token(token.token, token.token_id);
+      }
     }
   }
 
+  /**
+   * Convert an id to a token.
+   *
+   * @param {number} id - The id to be converted to a token.
+   * @return {string} The corresponding token for the given id.
+   */
   ids_to_token(id: number): string {
     const token = this.vocab_ids[id];
     const special_token = Object.entries(this.special_tokens).find(
@@ -72,6 +116,12 @@ export class Llama2Tokenizer {
       throw new Error(`Unknown id: ${id}`);
     }
   }
+  /**
+   * token_to_id function takes a token as input and returns its corresponding id if found in the vocabulary, otherwise throws an error.
+   *
+   * @param {string} token - the input token
+   * @return {number} the corresponding id of the input token
+   */
   token_to_id(token: string): number {
     const id = this.vocab[token];
     const special_token = this.special_tokens[token];
@@ -84,10 +134,21 @@ export class Llama2Tokenizer {
     }
   }
 
+  /**
+   * Retrieve the vocabulary.
+   *
+   * @return {Object} a shallow copy of the vocabulary
+   */
   get_vocab() {
-    return { ...this.vocab };
+    return { ...this.vocab, ...this.special_tokens };
   }
 
+  /**
+   * Checks if the token is a valid token.
+   *
+   * @param {string} token - the token to be checked
+   * @return {boolean} true if the token is valid, false otherwise
+   */
   valid_token(token: string): boolean {
     return token in this.vocab || token in this.special_tokens;
   }
@@ -98,13 +159,15 @@ export class Llama2Tokenizer {
   tokenize(text: string): string[] {
     const tokens = this.tokens_trie.split(text);
 
-    // convert unknown unicode to <0xXX>
     const result = [] as string[];
     for (const token of tokens) {
       if (this.valid_token(token)) {
         result.push(token);
       } else {
+        // convert unknown unicode to <0xXX>
+        // TODO: use a better way to handle unknown unicode (某些vocab不支持unknown unicode可能需要<unk>代替)
         const bytes = utf8Encoder.encode(token);
+        console.log({ token, bytes });
         for (const byte of bytes) {
           result.push(`<0x${byteToHex(byte)}>`);
         }

@@ -1,14 +1,16 @@
 // test source code
-// import { Llama2Tokenizer } from "../src/main";
+import { Llama2Tokenizer } from "../../src/main";
 // test build code
-import { Llama2Tokenizer } from "../dist/main";
+// import { Llama2Tokenizer } from "../../dist/main";
 
-describe("Llama2Tokenizer", () => {
+import { load_vocab } from "@lenml/llama2-tokenizer-vocab-baichuan2";
+
+describe("Baichuan2Tokenizer", () => {
   let tokenizer: Llama2Tokenizer;
 
   beforeAll(async () => {
     tokenizer = new Llama2Tokenizer();
-    tokenizer.load_llama2_vocab();
+    tokenizer.install_vocab(load_vocab());
   });
 
   test("tokenize simple", () => {
@@ -23,11 +25,9 @@ describe("Llama2Tokenizer", () => {
 
   test("tokenize with utf8", () => {
     expect(tokenizer.tokenize("你好，世界！")).toEqual([
-      "你",
-      "好",
+      "你好",
       "，",
-      "世",
-      "界",
+      "世界",
       "！",
     ]);
   });
@@ -70,6 +70,7 @@ describe("Llama2Tokenizer", () => {
   });
 
   test("tokenize with unknown unicode", () => {
+    // FIXME: 🍺 不是 unknown unicode
     const text = "this is beer: 🍺";
     expect(tokenizer.tokenize(text)).toEqual([
       "this",
@@ -77,59 +78,53 @@ describe("Llama2Tokenizer", () => {
       " beer",
       ":",
       " ",
-      "<0xF0>",
-      "<0x9F>",
-      "<0x8D>",
-      "<0xBA>",
+      "🍺",
     ]);
   });
 
   test("encode simple", () => {
     expect(tokenizer.encode("Hello this is a test")).toEqual([
-      16230, 456, 349, 264, 1369,
+      23160, 1528, 1414, 1346, 2804,
     ]);
   });
   test("encode with utf8", () => {
-    expect(tokenizer.encode("你好，世界！")).toEqual([
-      29383, 29530, 28924, 30050, 29822, 29267,
-    ]);
+    expect(tokenizer.encode("你好，世界！")).toEqual([16829, 65, 2089, 67]);
   });
   test("encode with special tokens", () => {
-    tokenizer.add_special_token("<|im_start|>", 32000);
-    tokenizer.add_special_token("<|im_end|>", 32001);
+    tokenizer.add_special_token("<|im_start|>", 125698);
+    tokenizer.add_special_token("<|im_end|>", 125699);
     expect(
       tokenizer.encode("<|im_start|>Hello this is a test<|im_end|>")
-    ).toEqual([32000, 16230, 456, 349, 264, 1369, 32001]);
+    ).toEqual([125698, 23160, 1528, 1414, 1346, 2804, 125699]);
   });
   test("encode with unknown unicode", () => {
+    // TODO: 这个词表很大...其实是包含了几乎所有emoji的...这个case要改
     const text = "this is beer: 🍺";
     expect(tokenizer.encode(text)).toEqual([
-      894, 349, 11102, 28747, 28705, 243, 162, 144, 189,
+      4943, 1414, 15488, 92345, 92311, 110027,
     ]);
   });
 
   test("decode simple", () => {
-    expect(tokenizer.decode([16230, 456, 349, 264, 1369])).toEqual(
+    expect(tokenizer.decode([23160, 1528, 1414, 1346, 2804])).toEqual(
       "Hello this is a test"
     );
   });
   test("decode with utf8", () => {
-    expect(
-      tokenizer.decode([29383, 29530, 28924, 30050, 29822, 29267])
-    ).toEqual("你好，世界！");
+    expect(tokenizer.decode([16829, 65, 2089, 67])).toEqual("你好，世界！");
   });
   test("decode with special tokens", () => {
-    tokenizer.add_special_token("<|im_start|>", 32000);
-    tokenizer.add_special_token("<|im_end|>", 32001);
+    tokenizer.add_special_token("<|im_start|>", 125698);
+    tokenizer.add_special_token("<|im_end|>", 125699);
     expect(
-      tokenizer.decode([32000, 16230, 456, 349, 264, 1369, 32001])
+      tokenizer.decode([125698, 23160, 1528, 1414, 1346, 2804, 125699])
     ).toEqual("<|im_start|>Hello this is a test<|im_end|>");
   });
   test("decode with unknown unicode", () => {
     const text = "this is beer: 🍺";
-    expect(
-      tokenizer.decode([894, 349, 11102, 28747, 28705, 243, 162, 144, 189])
-    ).toEqual(text);
+    expect(tokenizer.decode([4943, 1414, 15488, 92345, 92311, 110027])).toEqual(
+      text
+    );
   });
 
   test("convert_tokens_to_string", () => {
@@ -147,6 +142,6 @@ describe("Llama2Tokenizer", () => {
   test("convert_tokens_to_ids", () => {
     expect(
       tokenizer.convert_tokens_to_ids(["Hello", " this", " is", " a", " test"])
-    ).toEqual([16230, 456, 349, 264, 1369]);
+    ).toEqual([23160, 1528, 1414, 1346, 2804]);
   });
 });

@@ -1,9 +1,10 @@
 import { Llama2Tokenizer } from "../dist/main";
+import { load_vocab } from "@lenml/llama2-tokenizer-vocab-llama2";
 
 // Function to run benchmark test
 const runBenchmark = (iterations: number, text: string) => {
   const tokenizer = new Llama2Tokenizer();
-  tokenizer.load_llama2_vocab();
+  tokenizer.install_vocab(load_vocab());
 
   const start = process.hrtime();
 

@@ -63,7 +63,7 @@ npm install @lenml/llama2-tokenizer-vocab-llama2
 
 ## Usage
 
-### Importing Tokenizer and vocab
+### Importing the Tokenizer
 
 ```typescript
 import { Llama2Tokenizer } from "@lenml/llama2-tokenizer";

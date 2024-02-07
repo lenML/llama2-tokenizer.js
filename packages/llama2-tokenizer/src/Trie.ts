@@ -66,6 +66,9 @@ export class Trie {
    * ```
    */
   split(text: string): string[] {
+    if (!text) {
+      return [];
+    }
     let states: Record<number, any> = {};
 
     // indexes are counted left of the chars index.
