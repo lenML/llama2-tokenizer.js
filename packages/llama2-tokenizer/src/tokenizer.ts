@@ -167,7 +167,6 @@ export class Llama2Tokenizer {
         // convert unknown unicode to <0xXX>
         // TODO: use a better way to handle unknown unicode (某些vocab不支持unknown unicode可能需要<unk>代替)
         const bytes = utf8Encoder.encode(token);
-        console.log({ token, bytes });
         for (const byte of bytes) {
           result.push(`<0x${byteToHex(byte)}>`);
         }
