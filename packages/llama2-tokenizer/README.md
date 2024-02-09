@@ -142,7 +142,7 @@ const main = async () => {
   tokenizer.install_vocab(vocab_model);
   console.log(tokenizer.tokenize("你好，世界！"));
   console.log(tokenizer.encode("你好，世界！"));
-  console.log(tokenizer.decode([2448, 1960, 8021, 1999, 1039, 8013]));
+  console.log(tokenizer.decode([29383, 29530, 28924, 30050, 29822, 29267]));
 };
 
 main();
