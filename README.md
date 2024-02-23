@@ -18,6 +18,7 @@ Suitable for browser and nodejs environment.
 ## support models
 - llama2
 - mistral
+- gemma
 - zephyr
 - vicuna
 - baichuan2
@@ -31,19 +32,19 @@ llama2's vocab is different from llama1, so a new tokenizer needs to be defined 
 
 # Packages
 
-| Library Name                           | Description                               | Compatibility                                        |
+| Name                           | Desc                               | Support models                                        |
 |---------------------------------------|-------------------------------------------|-------------------------------------------------------|
 | @lenml/llama2-tokenizer               | Tokenizer library for text segmentation  |                                                       |
-| @lenml/llama2-tokenizer-vocab-llama2 | Vocabulary for llama2                    | mistral, zephyr, vicuna, llama2                       |
-| @lenml/llama2-tokenizer-vocab-baichuan2 | Vocabulary for baichuan2               | baichuan2                                            |
-| @lenml/llama2-tokenizer-vocab-chatglm3 | Vocabulary for chatglm3                 | chatglm3                                             |
-| @lenml/llama2-tokenizer-vocab-internlm2 | Vocabulary for internlm2               | internlm2                                            |
-| @lenml/llama2-tokenizer-vocab-yi       | Vocabulary for yi                       | yi                                                    |
+| @lenml/llama2-tokenizer-vocab-llama2 | Vocabulary for llama2 [hf repo](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2)                    | mistral, zephyr, vicuna, llama2                       |
+| @lenml/llama2-tokenizer-vocab-baichuan2 | Vocabulary for baichuan2 [hf repo](https://huggingface.co/baichuan-inc/Baichuan2-13B-Chat)              | baichuan2                                            |
+| @lenml/llama2-tokenizer-vocab-chatglm3 | Vocabulary for chatglm3  [hf repo](https://huggingface.co/THUDM/chatglm3-6b)               | chatglm3                                             |
+| @lenml/llama2-tokenizer-vocab-internlm2 | Vocabulary for internlm2 [hf repo](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2)              | internlm2                                            |
+| @lenml/llama2-tokenizer-vocab-yi       | Vocabulary for yi [hf repo](https://huggingface.co/01-ai/Yi-34B-Chat)                      | yi                                                    |
+| @lenml/llama2-tokenizer-vocab-gemma       | Vocabulary for gemma [hf repo](https://huggingface.co/google/gemma-7b)                      | gemma                                                    |
 | @lenml/llama2-tokenizer-vocab-falcon   | Vocabulary for falcon (🚧WIP)            | falcon (🚧WIP)                                         |
 | @lenml/llama2-tokenizer-vocab-neox     | Vocabulary for neox (🚧WIP)              | neox, RWKV (🚧WIP)                                     |
 | @lenml/llama2-tokenizer-vocab-emoji     | a vocab demo (🚧WIP)              | 🚧WIP                                     |
 
-This table lists the name of each library, its description, and its compatibility.
 
 ## Installation
 
@@ -59,6 +60,7 @@ npm install @lenml/llama2-tokenizer-vocab-llama2
 # npm install @lenml/llama2-tokenizer-vocab-falcon
 # npm install @lenml/llama2-tokenizer-vocab-internlm2
 # npm install @lenml/llama2-tokenizer-vocab-yi
+# npm install @lenml/llama2-tokenizer-vocab-gemma
 ```
 
 ## Usage
@@ -177,8 +179,11 @@ Average Time per Iteration: 0.00089 seconds
 - [x] support baichuan vocab
 - [x] support yi vocab
 - [x] support internlm2 vocab
+- [x] support gemma vocab
 - [ ] support RWKV(neox) vocab
 - [ ] support falcon
+- [ ] tokenizer demo: emoji
+- [ ] normalizers
 - [ ] Chat Template
 
 # How to build
