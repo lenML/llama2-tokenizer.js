@@ -39,6 +39,11 @@ files = [
         "filename": "falcon-tokenizer.model.json",
         "url": "https://huggingface.co/tiiuae/falcon-7b/raw/main/tokenizer.json",
     },
+    # gemma-7b
+    {
+        "filename": "gemma-tokenizer.model.json",
+        "url": "https://huggingface.co/google/gemma-7b/resolve/main/tokenizer.json?download=true",
+    },
 ]
 
 for file in files:

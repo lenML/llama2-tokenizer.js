@@ -20,8 +20,14 @@ const read_json_file = (filepath) => {
   let file_content = fs.readFileSync(filepath, "utf-8");
 
   if (filepath.endsWith(".model.json")) {
-    // replace "Ġ" with " " in file_content
-    file_content = file_content.replace(/Ġ/g, " ");
+    // TODO: normalizer
+    if (filepath.includes("gemma")) {
+      // replace "Ġ" with " " in file_content
+      file_content = file_content.replace(/▁/g, " ");
+    } else {
+      // replace "Ġ" with " " in file_content
+      file_content = file_content.replace(/Ġ/g, " ");
+    }
   }
 
   const data = JSON.parse(file_content);

@@ -1,6 +1,6 @@
 {
-  "name": "@lenml/llama2-tokenizer",
-  "version": "1.1.2",
+  "name": "@lenml/llama2-tokenizer-vocab-gemma",
+  "version": "1.1.0",
   "description": "",
   "source": "src/main.ts",
   "main": "dist/main.js",
@@ -25,7 +25,6 @@
     "dev": "pnpm watch",
     "start": "pnpm build",
     "test": "jest",
-    "test:coverage": "jest --coverage",
     "prepack": "pnpm build"
   },
   "keywords": [
@@ -49,15 +48,6 @@
   },
   "homepage": "https://github.com/lenML/llama2-tokenizer.js#readme",
   "devDependencies": {
-    "@lenml/llama2-tokenizer-vocab-baichuan2": "workspace:^",
-    "@lenml/llama2-tokenizer-vocab-chatglm3": "workspace:^",
-    "@lenml/llama2-tokenizer-vocab-emoji": "workspace:^",
-    "@lenml/llama2-tokenizer-vocab-falcon": "workspace:^",
-    "@lenml/llama2-tokenizer-vocab-gemma": "workspace:^",
-    "@lenml/llama2-tokenizer-vocab-internlm2": "workspace:^",
-    "@lenml/llama2-tokenizer-vocab-llama2": "workspace:^",
-    "@lenml/llama2-tokenizer-vocab-neox": "workspace:^",
-    "@lenml/llama2-tokenizer-vocab-yi": "workspace:^",
     "@types/jest": "^29.5.11",
     "@types/node": "^20.10.6",
     "jest": "^29.7.0",

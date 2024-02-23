@@ -15,6 +15,10 @@ echo "build neox done"
 node $BUILD_TOOL_PATH $MODEL_FILE_DIR/falcon-tokenizer.model.json $PACKAGES_DIR/vocab-falcon/src/vocab.ts --overwrite
 echo "build falcon done"
 
+# build gemma
+node $BUILD_TOOL_PATH $MODEL_FILE_DIR/gemma-tokenizer.model.json $PACKAGES_DIR/vocab-gemma/src/vocab.ts --overwrite
+echo "build gemma done"
+
 # *.json file read
 # build yi
 node $BUILD_TOOL_PATH $MODEL_FILE_DIR/yi-tokenizer.json $PACKAGES_DIR/vocab-yi/src/vocab.ts --overwrite
