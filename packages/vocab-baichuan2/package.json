@@ -1,6 +1,6 @@
 {
   "name": "@lenml/llama2-tokenizer-vocab-baichuan2",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "source": "src/main.ts",
   "main": "dist/main.js",
@@ -10,7 +10,8 @@
   "exports": {
     ".": {
       "import": "./dist/main.mjs",
-      "require": "./dist/main.js"
+      "require": "./dist/main.js",
+      "types": "./dist/main.d.ts"
     },
     "./dist/main.global.js": "./dist/main.global.js"
   },
