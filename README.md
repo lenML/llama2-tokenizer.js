@@ -57,7 +57,6 @@ npm install @lenml/llama2-tokenizer
 npm install @lenml/llama2-tokenizer-vocab-llama2
 # npm install @lenml/llama2-tokenizer-vocab-baichuan2
 # npm install @lenml/llama2-tokenizer-vocab-chatglm3
-# npm install @lenml/llama2-tokenizer-vocab-falcon
 # npm install @lenml/llama2-tokenizer-vocab-internlm2
 # npm install @lenml/llama2-tokenizer-vocab-yi
 # npm install @lenml/llama2-tokenizer-vocab-gemma
