@@ -1,3 +1,17 @@
+# :warning: IMPORTANT UPDATE :warning:
+
+Our library `@lenml/llama2-tokenizer` has been deprecated. We are excited to introduce our new library `@lenml/tokenizers` as its replacement, offering a broader set of features and an enhanced experience.
+
+## Why switch to `@lenml/tokenizers`?
+
+- **Fully Compatible with `transformers.js` Interfaces**: Seamlessly supports all interfaces defined in `transformers.js`, making migration and integration effortless.
+- **Support for a Wide Range of Models**: Regardless of which model you need, our new library supports it, ensuring broader coverage.
+- **Rich Feature Implementation**: Includes a complete implementation of chat templates and normalizers to better serve your text processing and tokenization needs.
+
+
+check out [lenML/tokenizers](https://github.com/lenML/tokenizers).
+
+
 # 🦙Llama2 Tokenizer for JavaScript
 
 Llama2 Tokenizer is a TypeScript library for tokenizing and encoding text using the Llama2 vocabulary.
